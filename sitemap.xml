@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  
+    
+    
+  
+
+  
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/add-first-cluster.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/automation.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/learn/azure-storage.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/learn/choose-class-and-size.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/clone-apps.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/close-account.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/learn/define-custom-app.html</loc>
+      
+      <lastmod>2021-06-16T19:27:02+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/faq.html</loc>
+      
+      <lastmod>2021-06-16T19:29:36+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/support/get-help.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/</loc>
+      
+      <lastmod>2021-06-14T14:11:03+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/intro.html</loc>
+      
+      <lastmod>2021-06-11T18:00:51+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/solutions/jenkins-deploy-from-helm-chart.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/release-notes/known-issues.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/release-notes/known-limitations.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/legal-notices.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/log-in.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/manage-apps.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/manage-credentials.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/manage-notifications.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/manage-users.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/solutions/mariadb-deploy-from-helm-chart.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/solutions/mysql-deploy-from-helm-chart.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/solutions/postgres-deploy-from-helm-chart.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/protect-apps.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/quick-start.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/support/register-support.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/register.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/restore-apps.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/solutions/search.html</loc>
+      
+      <lastmod>2021-07-12T01:41:26+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/search.html</loc>
+      
+      <lastmod>2021-07-12T01:41:26+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/search.html</loc>
+      
+      <lastmod>2021-07-12T01:41:26+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/support/search.html</loc>
+      
+      <lastmod>2021-07-12T01:41:26+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/learn/search.html</loc>
+      
+      <lastmod>2021-07-12T01:41:26+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra//search.html</loc>
+      
+      <lastmod>2021-07-12T01:41:19+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/set-up-billing.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/set-up-google-cloud.html</loc>
+      
+      <lastmod>2021-07-12T01:31:55+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/set-up-microsoft-azure.html</loc>
+      
+      <lastmod>2021-06-11T18:04:20+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/unmanage.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/learn/validated-vs-standard.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/videos.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/view-account-activity.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/view-apps.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/view-clusters.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/use/view-dashboard.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/release-notes/whats-new.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+    <url>
+      <loc>https://docs.netapp.com/us-en/astra/get-started/whats-next.html</loc>
+      
+      <lastmod>2021-06-08T19:31:45+00:00</lastmod>
+      
+    </url>
+  
+
+  
+  
+</urlset>

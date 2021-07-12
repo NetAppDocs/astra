@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head class="at-element-marker">
+  <title>Set up Microsoft Azure</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Set up Microsoft Azure" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/us-en/astra/get-started/set-up-microsoft-azure.html" />
+	<meta property="og:description" content="A few steps are required to prepare your Microsoft Azure subscription before you can manage Azure Kubernetes Service clusters with Astra Control Service." />
+  <meta property="og:image" content="https://docs.netapp.com/us-en/astra/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/>
+  
+  <meta name="description" content="A few steps are required to prepare your Microsoft Azure subscription before you can manage Azure Kubernetes Service clusters with Astra Control Service.">
+  <meta name="keywords" content=" azure, azure netapp files, register, create account, create netapp account, azure subscription, azure permissions, service principal, create service principal, set up azure permissions, set up service principal, setup service principal, setup azure permissions, permissions, create capacity pool, setup capacity pool, set up capacity pool, kubernetes cluster, cluster requirements, version requirements, supported versions, supported regions, azure regions, kubernetes version, linux, image type, networking">
+  
+  
+
+  <!-- Icons -->
+  <link rel="icon" href="/us-en/astra/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed -->
+  
+
+  <!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+  <!-- Elastic Search -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/searchkit/0.10.0/theme.css">
+
+  <!-- Controls AsciiDoctor Admonition Blocks -->
+  <link rel="stylesheet" type="text/css" href="/us-en/astra/css/font-awesome.min.css">
+
+  <!-- Controls the shadow effect for search dropdown menu -->
+  <link rel="stylesheet" href="/us-en/astra/css/boxshadowproperties.css">
+
+  <!-- NetApp CSS controls the technical content -->
+  <link rel="stylesheet" type="text/css" href="/us-en/astra/css/netapp.css">
+
+  <!-- WWW CSS Content -->
+  <link rel="stylesheet" type="text/css" href="/us-en/astra/css/www-luci-dotcom.min.css">
+  <link rel="stylesheet" type="text/css" href="/us-en/astra/css/www-netapp-dotcom.css">
+  <link rel="stylesheet" href="/us-en/astra/css/www-netapp-library-critical.min.css" media="all" >
+  <link rel="stylesheet" href="/us-en/astra/css/www-netapp-library-non-critical.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="/us-en/astra/css/www-netapp-library-global-header-footer.min.css">
+
+  <!-- NetApp IE Customizations -->
+  <link rel="stylesheet" href='/us-en/astra/css/na-utility.css' type='text/css'>
+  <link rel="stylesheet" href='/us-en/astra/css/na-sidebar.css' type='text/css'>
+  <link rel='stylesheet' href='/us-en/astra/css/clouddocs.css' type='text/css'>
+  <link rel='stylesheet' href='/us-en/astra/css/na-pagenav.css' type='text/css'>
+
+  
+  <link rel="stylesheet" href="/us-en/astra/css/astra.css" type="text/css">
+  
+
+  
+  <link rel='stylesheet' href='/us-en/astra/css/na-feature.css' type='text/css'>
+  
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
+  
+    <script src='/us-en/astra/js/na-search.js'></script>
+  
+
+  
+  <script src='/us-en/astra/js/na-pagenav.js'></script>
+  
+
+  <link rel='stylesheet' href='/us-en/astra/css/prism.css' type='text/css'>
+  <link rel='stylesheet' href='/us-en/astra/css/prism-netapp.css' type='text/css'>
+
+
+  <script src='/us-en/astra/js/na-utility.js'></script>
+  <script src='/us-en/astra/js/clouddocs.js'></script>
+  <script>
+  if (document.location.hostname === "docs.netapp.com") {
+    var head = document.getElementsByTagName('head')[0];
+    var adobe = document.createElement("script");
+    adobe.type = "text/javascript";
+    adobe.src = "//assets.adobedtm.com/60287eadf1ee/c284da483c83/launch-e9ff3acac59f.min.js";
+    head.appendChild(adobe);
+  }
+  </script>
+  <script src='/us-en/astra/js/jquery.navgoco.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src='/us-en/astra/js/toc.js'></script>
+  <script src='/us-en/astra/js/customscripts.js'></script>
+
+  <script>
+      $(document).ready(function() {
+          
+          var collapseOnInit = true;
+          
+
+          var navSettings = {
+              "caretHtml": '',
+              "accordion": collapseOnInit,
+              "openClass": 'active', // open
+              "save": false, // leave false or nav highlighting doesn't work right
+              "cookie": {
+                  "name": 'navgoco',
+                  "expires": false,
+                  "path": '/'
+              },
+              "slide": {
+                  "duration": 400,
+                  "easing": 'swing'
+              }
+          };
+
+          // Initialize navgoco with default options
+          $("#mysidebar").navgoco(navSettings);
+          
+
+          $("#collapseAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', false);
+          });
+
+          $("#expandAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', true);
+          });
+
+      });
+
+  </script>
+  <script>
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+  </script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-81697994-3"></script>
+  <script>
+  if (document.location.hostname === "docs.netapp.com") {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-81697994-3');
+  }
+  </script>
+</head>
+
+
+  <body class role="document">
+    <div id="page" class="n-off-canvas-menu">
+      <div class="n-off-canvas-menu__menu"><!--TODO: Add offcanvas code --></div>
+      <div class="n-off-canvas-menu__content-wrap">
+        <header class="site-header" id="banner">
+  <!-- Start top_hat -->
+  <div class="n-top-hat">
+    <div class="n-container">
+      <div class="n-top-hat__cross-property-nav">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/products-a-z/" class="n-top-hat__link">Product and Solutions</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/support-and-training/netapp-university/" class="n-top-hat__link">Support and Training</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://cloud.netapp.com" class="n-top-hat__link">Cloud Central</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://community.netapp.com/" class="n-top-hat__link">Community</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://blog.netapp.com/" class="n-top-hat__link">Blog</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://customers.netapp.com/en/" class="n-top-hat__link">Customer Stories</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/us/contact-us/index.aspx" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="n-top-hat__utils">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/us/contact-us/index.aspx" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End top_hat -->
+
+  <!-- Start property bar -->
+  <style>
+    .n-property-navigation-bar__menus--desktop-experience .n-menu--mega__default-content__heading span {
+    color: #34B0FF;
+    }
+  </style>
+  <div class="n-property-bar " data-ntap-ui="sticky-nav">
+    <div class="n-property-bar__inner-wrap">
+      <div class="n-property-bar__menu-toggle">
+        <a href="#" class="n-property-bar__menu-toggle-link">
+          <span class="n-property-bar__menu-toggle-text">Menu</span>
+          <svg class="n-icon-bars n-property-bar__menu-toggle-icon" aria-labelledby="title">
+            <title>bars</title>
+            <use xlink:href="/us-en/astra/common/svg/sprite.svg#bars"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="n-property-bar__property-mark ">
+        <a href="https://www.netapp.com" class="n-property-bar__property-link">
+          <div class="n-property-bar__logo">
+            <svg class="n-icon-netapp-mark n-icon-netapp-mark n-property-bar__netapp-mark-icon" aria-labelledby="title">
+              <title>netapp-mark</title>
+              <use xlink:href="/us-en/astra/common/svg/sprite.svg#netapp-mark"></use>
+            </svg>
+            <svg class="n-icon-netapp-logo n-property-bar__logo-svg" aria-labelledby="title">
+              <title>netapp-logo</title>
+              <use xlink:href="/us-en/astra/common/svg/sprite.svg#netapp-logo"></use>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      
+      <div class="search-property-bar">
+        <div id="search-demo-container" class="searchbox n-property-bar__search">
+          <div id="react-search" data-type="widget" data-placeholder="Search Documentation" data-no-results-found="No results were found for {query}" data-did-you-mean="Search for {suggestion}." data-no-results-found-did-you-mean="No results found for {query}. Did you mean {suggestion}?" data-results-found="{hitCount} results found"  ></div>
+          <button class="n-property-bar__search-toggle-button" type="button">
+            <svg class="n-icon-search n-property-bar__search-toggle-button-icon" aria-labelledby="title">
+              <title>search</title>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="n-property-bar__toolbar"><!-- Start Language Selector --><!-- End Language Selector -->
+
+    <div class="n-property-bar__cta"></div>
+  </div>
+  <script>
+    $(function(){
+        var currentLocalization = $('html').attr('lang');
+
+        var localizationsDictionary = {
+            "en-CA" : "https://www.netapp.com/search/index.aspx?for_cr=canada&",
+            "en-IN" : "https://www.netapp.com/search/index.aspx?for_cr=india&",
+            "nl-NL" : "https://www.netapp.com/search/index.aspx?for_cr=netherlands&",
+            "ru-RU" : "https://www.netapp.com/search/index.aspx?for_cr=russia&",
+            "sv-SE" : "https://www.netapp.com/search/index.aspx?for_cr=sweden&",
+            "it-IT" : "https://www.netapp.com/search/index.aspx?for_cr=italy&",
+            "he-IL" : "https://www.netapp.com/search/index.aspx?for_cr=israel&",
+            "ko-KR" : "https://www.netapp.com/search/index.aspx?for_cr=korea&",
+            "zh-TW" : "https://www.netapp.com/search/index.aspx?for_cr=taiwan&",
+            "en-GB" : "https://www.netapp.com/search/index.aspx?for_cr=unitedkingdom&",
+            "en-SG" : "https://www.netapp.com/search/index.aspx?for_cr=asean&",
+            "en-AU" : "https://www.netapp.com/search/index.aspx?for_cr=australia&",
+            "pt-BR" : "https://www.netapp.com/search/index.aspx?for_cr=brasil&",
+            "de-CH" : "https://www.netapp.com/search/index.aspx?for_cr=switzerland&",
+            "es-MX" : "https://www.netapp.com/search/index.aspx?for_cr=mexico&"
+        };
+
+        if($('html').hasClass('ntap-whitelisted') && localizationsDictionary.hasOwnProperty(currentLocalization)) {
+            $('.n-property-bar__property-link').attr('href', '/');
+        }
+    });
+  </script>
+  <!-- End property bar -->
+</header>
+
+        <div class="ie-utility">
+  <div class="ie-menu">
+    <div class="n-breadcrumb">
+      <ul class="n-breadcrumb__list">
+        <li class="n-breadcrumb__list-item">
+          <a href="https://www.netapp.com">Home</a>
+        </li>
+        <li class="n-breadcrumb__list-item">
+          <a href="https://docs.netapp.com">Documentation</a>
+        </li>
+        
+
+        <li class="n-breadcrumb__list-item">
+          <a href="/us-en/astra/">Astra</a>
+        </li>
+        <li class="n-breadcrumb__list-item">
+          Set up Microsoft Azure
+        </li>
+      </ul>
+    </div>
+
+    <div style="clear: both"></div><!-- Main needs to have height -->
+  </div>
+</div>
+
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+  <!-- Sidebar Column -->
+  
+  <div class="col-md-3" >
+      <div class="n-pdf-header">
+  <a id="toggleButtonPdf" class="n-pdf-button" type="button">PDFs<span>
+    </span>
+  </a>
+</div>
+<ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><div class="n-pdf-section">
+      <span class="n-pdf-section-title">Site</span>
+    </div>
+    <li>
+      <a target="_blank" href="/us-en/astra/pdfs/fullsite-sidebar/Astra_Control_Service_documentation.pdf" >
+        <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+        Astra Control Service documentation
+      </a>
+    </li>
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Release_notes.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Release notes
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Get_started.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Get started
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Set_up_your_cloud_provider.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Set up your cloud provider
+          </a>
+        </li>
+        <span>
+          
+
+
+    <div class="n-pdf-section">
+  <span class="n-pdf-section-title">This page</span>
+</div>
+
+<li class="active">
+  <a target="_blank" href="/us-en/astra/pdfs/pages/get-started/set-up-microsoft-azure.pdf" >
+    <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+    Set up Microsoft Azure
+  </a>
+</li>
+
+
+  
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Use_Astra_Control_Service.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Use Astra Control Service
+          </a>
+        </li>
+        <span>
+          
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Manage_and_protect_apps.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Manage and protect apps
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/View_app_and_compute_health.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            View app and compute health
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Manage_your_account.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Manage your account
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Learn.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Learn
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Deploy_apps.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Deploy apps
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Knowledge_and_support.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Knowledge and support
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+
+</ul>
+
+<script>
+  $("#toggleContainerPdf li.active").parents('li').toggle('display');
+  $("#toggleContainerPdf li.active").parents('span.subfolders').toggle('display');
+  $("#toggleButtonPdf").click(function () {
+    $("#toggleContainerPdf").toggle('display');
+  });
+</script><ul id="mysidebar" class="nav"><li class=" "><a class="na-navbar-padding" href="/us-en/astra/index.html">
+        Astra Control Service docs
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Release notes</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/release-notes/whats-new.html">
+        What's new
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/release-notes/known-issues.html">
+        Known issues
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/release-notes/known-limitations.html">
+        Known limitations
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Get started</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/intro.html">
+        Intro to Astra Control Service
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/quick-start.html">
+        Quick start
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Set up your cloud provider</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/set-up-google-cloud.html">
+        Set up Google Cloud
+      </a></li><li class="  active "><a class="na-navbar-padding" href="/us-en/astra/get-started/set-up-microsoft-azure.html">
+        Set up Microsoft Azure
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/register.html">
+        Register for an Astra Control account
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/add-first-cluster.html">
+        Manage compute from Astra Control
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/whats-next.html">
+        What's next?
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/videos.html">
+        Videos
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/faq.html">
+        FAQ
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Use Astra Control Service</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/log-in.html">
+        Log in
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Manage and protect apps</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/manage-apps.html">
+        Start managing apps
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/protect-apps.html">
+        Protect apps
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/restore-apps.html">
+        Restore apps
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/clone-apps.html">
+        Clone and migrate apps
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> View app and compute health</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/view-dashboard.html">
+        Dashboard summary
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/view-clusters.html">
+        Compute health and details
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/view-apps.html">
+        App health and details
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Manage your account</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/set-up-billing.html">
+        Set up billing
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/manage-users.html">
+        Invite and manage users
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/manage-credentials.html">
+        Manage cloud provider credentials
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/view-account-activity.html">
+        View account activity
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/manage-notifications.html">
+        Manage notifications
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/close-account.html">
+        Close your account
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/unmanage.html">
+        Unmanage apps and compute
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/automation.html">
+        Automate with REST
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Learn</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/learn/azure-storage.html">
+        Storage for AKS clusters
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/learn/choose-class-and-size.html">
+        Storage for GKE clusters
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/learn/validated-vs-standard.html">
+        Validated apps vs standard apps
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/learn/define-custom-app.html">
+        Defining a custom app
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Deploy apps</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/solutions/jenkins-deploy-from-helm-chart.html">
+        Deploy Jenkins
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/solutions/mariadb-deploy-from-helm-chart.html">
+        Deploy MariaDB
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/solutions/mysql-deploy-from-helm-chart.html">
+        Deploy MySQL
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/solutions/postgres-deploy-from-helm-chart.html">
+        Deploy Postgres
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Knowledge and support</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/support/register-support.html">
+        Register for support
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/support/get-help.html">
+        Get help
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/legal-notices.html">
+        Legal notices
+      </a></li></ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+  </div>
+  
+
+  <div class="ie-content-pane n-doc__component-detail-content n-doc__component-detail-content--show-code">
+    <!-- Begin of page container -->
+    <article class="page-content">
+      
+
+
+
+<div class="n-doc__component-detail-heading-wrap">
+  <h1 class="n-doc__component-detail-heading">Set up Microsoft Azure</h1>
+</div>
+
+
+<p class="page-details">
+  
+    
+    <time datetime="2021-06-11 18:04:20 +0000">06/11/2021</time>
+    
+  
+
+<span>Contributors
+  <a target="_blank" href="https://github.com/netapp-bcammett">
+    <img  class="avatar avatar-small"
+          alt="netapp-bcammett"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/18287750?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
+</span>
+
+
+  <span>
+    <a target="_blank" href="/us-en/astra/pdfs/pages/get-started/set-up-microsoft-azure.pdf" role="button">
+      <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>Download PDF of this page</a>
+  </span>
+
+
+</p>
+
+
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A few steps are required to prepare your Microsoft Azure subscription before you can manage Azure Kubernetes Service clusters with Astra Control Service.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start-for-setting-up-azure">Quick start for setting up Azure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Get started quickly by following these steps or scroll down to the remaining sections for full details.</p>
+</div>
+<div class="sect3">
+<h4 id="review-astra-control-service-requirements-for-azure-kubernetes-service"><span class="image"><img src="../media/get-started/number1.png" alt="Number 1"></span> Review Astra Control Service requirements for Azure Kubernetes Service</h4>
+<div class="paragraph quick-margin-para">
+<p>Ensure that clusters are healthy and running Kubernetes version 1.17 or later, that node pools are online and running <strong>Linux</strong>, and more. <a href="#aks-cluster-requirements">Learn more about this step</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="register-for-azure-netapp-files"><span class="image"><img src="../media/get-started/number2.png" alt="Number 2"></span> Register for Azure NetApp Files</h4>
+<div class="paragraph quick-margin-para">
+<p>Request access to the Azure NetApp Files service and then register the NetApp Resource Provider. <a href="#register-for-azure-netapp-files-2">Learn more about this step</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="create-a-netapp-account"><span class="image"><img src="../media/get-started/number3.png" alt="Number 3"></span> Create a NetApp account</h4>
+<div class="paragraph quick-margin-para">
+<p>In the Azure portal, go to Azure NetApp Files and create a NetApp account. <a href="#create-a-netapp-account-2">Learn more about this step</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="set-up-capacity-pools"><span class="image"><img src="../media/get-started/number4.png" alt="Number 4"></span> Set up capacity pools</h4>
+<div class="paragraph quick-margin-para">
+<p>Set up one or more capacity pools for your persistent volumes. <a href="#set-up-a-capacity-pool">Learn more about this step</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delegate-a-subnet-to-azure-netapp-files"><span class="image"><img src="../media/get-started/number5.png" alt="Number 5"></span> Delegate a subnet to Azure NetApp Files</h4>
+<div class="paragraph quick-margin-para">
+<p>Delegate a subnet to Azure NetApp Files so that Astra Control Service can create persistent volumes in that subnet. <a href="#delegate-a-subnet-to-azure-netapp-files-2">Learn more about this step</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="create-an-azure-service-principal"><span class="image"><img src="../media/get-started/number6.png" alt="Number 6"></span> Create an Azure service principal</h4>
+<div class="paragraph quick-margin-para">
+<p>Create an Azure service principal that has the Contributor role. <a href="#create-an-azure-service-principal-2">Read step-by-step instructions</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="aks-cluster-requirements">AKS cluster requirements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Kubernetes cluster must meet the following requirements so you can discover and manage it from Astra Control Service.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Kubernetes version</dt>
+<dd>
+<p>Clusters must be running Kubernetes version 1.17 or later.</p>
+</dd>
+<dt class="hdlist1">Image type</dt>
+<dd>
+<p>The image type for all node pools must be Linux.</p>
+</dd>
+<dt class="hdlist1">Cluster state</dt>
+<dd>
+<p>Clusters must be running in a healthy state and have at least one online worker node with no worker nodes in a failed state.</p>
+</dd>
+<dt class="hdlist1">Azure region</dt>
+<dd>
+<p>Clusters must reside in a region where Azure NetApp Files is available. <a href="https://azure.microsoft.com/en-us/global-infrastructure/services/?products=netapp" target="_blank" rel="noopener">View Azure products by region</a>.</p>
+</dd>
+<dt class="hdlist1">Subscription</dt>
+<dd>
+<p>Clusters must reside in a subscription where Azure NetApp Files is enabled. You&#8217;ll choose a subscription when you <a href="#register-for-azure-netapp-files-2">register for Azure NetApp Files</a>.</p>
+</dd>
+<dt class="hdlist1">VNet</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Clusters must reside in a VNet that has direct access to an Azure NetApp Files delegated subnet. <a href="#delegate-a-subnet-to-azure-netapp-files-2">Learn how to set up a delegated subnet</a>.</p>
+</li>
+<li>
+<p>If your Kubernetes clusters are in a VNet that&#8217;s peered to the Azure NetApp Files delegated subnet that&#8217;s in another VNet, then both sides of the peering connection must be online.</p>
+</li>
+<li>
+<p>Be aware that the default limit for the number of IPs used in a VNet (including immediately peered VNets) with Azure NetApp Files is 1,000. <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits" target="_blank" rel="noopener">View Azure NetApp Files resource limits</a>.</p>
+<div class="paragraph">
+<p>If you&#8217;re close to the limit, you have two options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can <a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits#request-limit-increase-" target="_blank" rel="noopener">submit a request for a limit increase</a>. Contact your NetApp representative if you need help.</p>
+</li>
+<li>
+<p>When creating a new AKS cluster, specify a new network for the cluster. Once the new network is created, provision a new subnet and delegate the subnet to Azure NetApp Files.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Private networking</dt>
+<dd>
+<p>Private networking must not be enabled on a cluster.</p>
+</dd>
+<dt class="hdlist1">External volume snapshot controller</dt>
+<dd>
+<p>Clusters must have a CSI volume snapshot controller installed. This controller is installed by default starting with K8s version 1.21, but you&#8217;ll need to check on clusters running versions 1.17, 1.18, 1.19, or 1.20. <a href="https://netapp-trident.readthedocs.io/en/latest/kubernetes/operations/tasks/volumes/snapshots.html" target="_blank" rel="noopener">Learn more about an external snapshot controller for on-demand volume snapshots</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="install-a-csi-volume-snapshot-controller">Install a CSI volume snapshot controller</h3>
+<div class="paragraph">
+<p>As noted in the list of requirements, Kubernetes clusters must have a CSI volume snapshot controller installed. Follow these steps to install the controller on your clusters.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Steps for K8s versions 1.17, 1.18, and 1.19</div>
+<ol class="arabic">
+<li>
+<p>Install volume snapshot CRDs.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kubectl" data-lang="kubectl">kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-3.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-3.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-3.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the snapshot controller.</p>
+<div class="paragraph">
+<p>If you want the snapshot controller in a specific namespace, download and edit the following files before you apply them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kubectl" data-lang="kubectl">kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-3.0/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-3.0/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<div class="title">Steps for K8s version 1.20</div>
+<ol class="arabic">
+<li>
+<p>Install volume snapshot CRDs.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kubectl" data-lang="kubectl">kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.0.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.0.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.0.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the snapshot controller.</p>
+<div class="paragraph">
+<p>If you want the snapshot controller in a specific namespace, download and edit the following files before you apply them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kubectl" data-lang="kubectl">kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.0.0/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.0.0/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="register-for-azure-netapp-files-2">Register for Azure NetApp Files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Get access to Azure NetApp Files by submitting a waitlist request. After you&#8217;re approved, you&#8217;ll need to register the NetApp Resource Provider.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Steps</div>
+<ol class="arabic">
+<li>
+<p><a href="https://aka.ms/azurenetappfiles" target="_blank" rel="noopener">Submit a waitlist request to access Azure NetApp Files</a>.</p>
+</li>
+<li>
+<p>Wait for a confirmation email from the Azure NetApp Files team.</p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-register#resource-provider" target="_blank" rel="noopener">Follow Azure NetApp Files documentation to register the NetApp Resource Provider</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-a-netapp-account-2">Create a NetApp account</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After you&#8217;ve been granted access, create a NetApp account in Azure NetApp Files.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Step</div>
+<ol class="arabic">
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-create-netapp-account" target="_blank" rel="noopener">Follow Azure NetApp Files documentation to create a NetApp account from the Azure portal</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="set-up-a-capacity-pool">Set up a capacity pool</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One or more capacity pools are required so that Astra Control Service can provision persistent volumes in a capacity pool. Astra Control Service doesn&#8217;t create capacity pools for you.</p>
+</div>
+<div class="paragraph">
+<p>Take the following into consideration as you set up capacity pools for your Kubernetes apps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A capacity pool can have an Ultra, Premium, or Standard service level. Each of these service levels are designed for different performance needs. Astra Control Service supports all three.</p>
+<div class="paragraph">
+<p>You need to set up a capacity pool for each service level that you want to use with your Kubernetes clusters.</p>
+</div>
+<div class="paragraph">
+<p><a href="../learn/azure-storage.html">Learn more about service levels for Azure NetApp Files</a>.</p>
+</div>
+</li>
+<li>
+<p>Before you create a capacity pool for the apps that you intend to protect with Astra Control Service, choose the required performance and capacity for those apps.</p>
+<div class="paragraph">
+<p>Provisioning the right amount of capacity ensures that users can create persistent volumes as they are needed. If capacity isn&#8217;t available, then the persistent volumes can&#8217;t be provisioned.</p>
+</div>
+</li>
+<li>
+<p>An Azure NetApp Files capacity pool can use the manual or auto QoS type. Astra Control Service supports auto QoS capacity pools. Manual QoS capacity pools aren&#8217;t supported.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Step</div>
+<ol class="arabic">
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-set-up-capacity-pool" target="_blank" rel="noopener">Follow Azure NetApp Files documentation to set up an auto QoS capacity pool</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="delegate-a-subnet-to-azure-netapp-files-2">Delegate a subnet to Azure NetApp Files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You need to delegate a subnet to Azure NetApp Files so that Astra Control Service can create persistent volumes in that subnet. Note that Azure NetApp Files enables you to have only one delegated subnet in a VNet.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re using peered VNets, then both sides of the peering connection must be online: the VNet where your Kubernetes clusters reside and the VNet that has the Azure NetApp Files delegated subnet.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Step</div>
+<ol class="arabic">
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-delegate-subnet" target="_blank" rel="noopener">Follow the Azure NetApp Files documentation to delegate a subnet to Azure NetApp Files</a>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<div class="title">After you&#8217;re done</div>
+<p>Wait about 10 minutes before discovering the compute running in the delegated subnet.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-an-azure-service-principal-2">Create an Azure service principal</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Astra Control Service requires a Azure service principal that is assigned the Contributor role. Astra Control Service uses this service principal to facilitate Kubernetes application data management on your behalf.</p>
+</div>
+<div class="paragraph">
+<p>A service principal is an identity created specifically for use with applications, services, and tools. Assigning a role to the service principal restricts access to specific Azure resources.</p>
+</div>
+<div class="paragraph">
+<p>Follow the steps below to create a service principal using the Azure CLI. You&#8217;ll need to save the output in a JSON file and provide it to Astra Control Service later on. <a href="https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli" target="_blank" rel="noopener">Refer to Azure documentation for more details about using the CLI</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following steps assume that you have permission to create a service principal and that you have the Microsoft Azure SDK (az command) installed on your machine.</p>
+</div>
+<div class="ulist">
+<div class="title">Requirements</div>
+<ul>
+<li>
+<p>The service principal must use regular authentication. Certificates aren&#8217;t supported.</p>
+</li>
+<li>
+<p>The service principal must be granted Contributor or Owner access to your Azure subscription.</p>
+</li>
+<li>
+<p>The Azure subscription must contain the AKS clusters and your Azure NetApp Files account.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Steps</div>
+<ol class="arabic">
+<li>
+<p>Identify the subscription and tenant ID where your AKS clusters reside (these are the clusters that you want to manage in Astra Control Service).</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-azureCLI" data-lang="azureCLI">az configure --list-defaults
+az account list --output table</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the service principal, assign the Contributor role, and specify the scope to the entire subscription where the clusters reside.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-azurecli" data-lang="azurecli">az ad sp create-for-rbac --name http://sp-astra-service-principal --role contributor --scopes /subscriptions/SUBSCRIPTION-ID</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Store the resulting Azure CLI output as a JSON file.</p>
+<div class="paragraph">
+<p>You&#8217;ll need to provide this file so that Astra Control Service can discover your AKS clusters and manage Kubernetes data management operations. <a href="../use/manage-credentials.html">Learn about managing credentials in Astra Control Service</a>.</p>
+</div>
+</li>
+<li>
+<p>Optional: Add the subscription ID to the JSON file so that Astra Control Service automatically populates the ID when you select the file.</p>
+<div class="paragraph">
+<p>Otherwise, you&#8217;ll need to enter the subscription ID in Astra Control Service when prompted.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
+  "appId": "0db3929a-bfb0-4c93-baee-aaf8",
+  "displayName": "sp-example-dev-sandbox",
+  "name": "http://sp-example-dev-sandbox",
+  "password": "mypassword",
+  "tenant": "011cdf6c-7512-4805-aaf8-7721afd8ca37",
+  "subscriptionId": "99ce999a-8c99-99d9-a9d9-99cce99f99ad"
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Optional: Test your service principal.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-azurecli" data-lang="azurecli">az login --service-principal --username APP-ID-SERVICEPRINCIPAL --password PASSWORD --tenant TENANT-ID
+az group list --subscription SUBSCRIPTION-ID
+az aks list --subscription SUBSCRIPTION-ID
+az storage container list --subscription SUBSCRIPTION-ID</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  
+  <!-- Start Page Toolbar -->
+  <div class="page-nav-toolbar">
+    <div class="page-nav-contribute"  >
+      <div class="page-nav-contribute-title">CONTRIBUTE</div>
+      <a target="_blank" href="https://github.com/NetAppDocs/astra/blob/main/get-started/set-up-microsoft-azure.adoc" class="btn btn-default githubEditButton" role="button"><img src="/us-en/astra/images/github.png" class="github-icon" />Edit on GitHub</a>
+      <a target="_blank" href="https://github.com/NetAppDocs/astra/issues/new?body=Page%3A%20[Set up Microsoft Azure](https://docs.netapp.com/us-en/astra/get-started/set-up-microsoft-azure.html)" class="btn btn-default githubEditButton" role="button"><img src="/us-en/astra/images/github.png" class="github-icon" />Request doc changes</a>
+      <a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  >Contributor's Guide</a>
+    </div>
+    <div class="page-nav-container">
+      <nav class="page-nav-fixed">
+        <div class="page-nav-title">ON THIS PAGE</div>
+        <div class="page-nav-links">
+          <ul class="page-nav-inner" id="page-menu"></ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  
+  <div style="clear: both"></div><!-- Main needs to have height -->
+</div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+      <div class="n-footer__bottom-left">
+
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+            <a href="https://www.netapp.com/us/legal/copyright.aspx">© 2021 NetApp, Inc.</a>
+            </li>
+
+</ul>
+</div>
+<div class="n-footer__social-links">
+<ul class="n-footer__social-link-list">
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-blog" href="https://blog.netapp.com" target="_blank" title="blog" alt="blog">
+<span class="n-footer__social-link-text">blog</span>
+<svg class="n-icon-blog n-footer__social-link-icon" aria-labelledby="title">
+  <title>blog@</title>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#blog"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-community" href="https://community.netapp.com/" target="_blank" title="community" alt="community">
+<span class="n-footer__social-link-text">community</span>
+<svg class="n-icon-community n-footer__social-link-icon" aria-labelledby="title">
+<title>community@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#comments"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-twitter" href="https://twitter.com/netapp" target="_blank" title="twitter" alt="twitter">
+<span class="n-footer__social-link-text">twitter</span>
+<svg class="n-icon-twitter n-footer__social-link-icon" aria-labelledby="title">
+<title>twitter@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#twitter"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-facebook" href="https://www.facebook.com/NetApp" target="_blank" title="facebook" alt="facebook">
+<span class="n-footer__social-link-text">facebook</span>
+<svg class="n-icon-facebook n-footer__social-link-icon" aria-labelledby="title">
+<title>facebook@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#facebook"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-linkedin" href="https://www.linkedin.com/company/netapp" target="_blank" title="linkedin" alt="linkedin">
+<span class="n-footer__social-link-text">linkedin</span>
+<svg class="n-icon-linkedin n-footer__social-link-icon" aria-labelledby="title">
+<title>linkedin@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#linkedin"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-youtube" href="https://www.youtube.com/user/NetAppTV" target="_blank" title="youtube" alt="youtube">
+<span class="n-footer__social-link-text">youtube</span>
+<svg class="n-icon-youtube n-footer__social-link-icon" aria-labelledby="title">
+<title>youtube@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#youtube"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-slideshare" href="https://www.slideshare.net/NetApp" target="_blank" title="slideshare" alt="slideshare">
+<span class="n-footer__social-link-text">slideshare</span>
+<svg class="n-icon-slideshare n-footer__social-link-icon" aria-labelledby="title">
+<title>slideshare@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#slideshare"></use>
+</svg>
+
+</a>
+</li>
+</ul>
+</div>
+
+</div>
+<div class="n-footer__bottom-right">
+  <p class="n-footer__fine-print">Have feedback for our website?<a target="_self" href="javascript:netapp_mailto()" class="n-footer__copyright">Let us know</a>
+  <a href="https://docs.netapp.com/us-en/announcements/" class="n-footer__copyright">Announcements</a>
+  </p>
+</div>
+</div>
+</div>
+</footer>
+
+      </div>
+
+      <!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/us-en/astra/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/us-en/astra/js/prism.js'></script>
+      <script type="text/javascript" src='/us-en/astra/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/us-en/astra/js/www-ntap.js'></script>
+  </body>
+
+  
+</html>

@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head class="at-element-marker">
+  <title>Set up Google Cloud</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Set up Google Cloud" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/us-en/astra/get-started/set-up-google-cloud.html" />
+	<meta property="og:description" content="A few steps are required to prepare your Google Cloud project before you can manage Google Kubernetes Engine clusters with Astra Control Service." />
+  <meta property="og:image" content="https://docs.netapp.com/us-en/astra/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/>
+  
+  <meta name="description" content="A few steps are required to prepare your Google Cloud project before you can manage Google Kubernetes Engine clusters with Astra Control Service.">
+  <meta name="keywords" content=" google cloud, google cloud platform, gcp, set up google cloud, set up gcp, set up service account, create service account, project, gcp project, permissions gcp permissions, service account permissions, key, service account key, json, key json, roles, service account roles, gcp roles, cvs, cvs for aws, cloud volumes service apis, apis, networking, cvs networking, cloud volumes service networking, private service access, kubernetes cluster, cluster requirements, version requirements, supported versions, supported regions, google cloud regions, gcp regions, kubernetes version, ubuntu, image type, networking">
+  
+  
+
+  <!-- Icons -->
+  <link rel="icon" href="/us-en/astra/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed -->
+  
+
+  <!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+  <!-- Elastic Search -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/searchkit/0.10.0/theme.css">
+
+  <!-- Controls AsciiDoctor Admonition Blocks -->
+  <link rel="stylesheet" type="text/css" href="/us-en/astra/css/font-awesome.min.css">
+
+  <!-- Controls the shadow effect for search dropdown menu -->
+  <link rel="stylesheet" href="/us-en/astra/css/boxshadowproperties.css">
+
+  <!-- NetApp CSS controls the technical content -->
+  <link rel="stylesheet" type="text/css" href="/us-en/astra/css/netapp.css">
+
+  <!-- WWW CSS Content -->
+  <link rel="stylesheet" type="text/css" href="/us-en/astra/css/www-luci-dotcom.min.css">
+  <link rel="stylesheet" type="text/css" href="/us-en/astra/css/www-netapp-dotcom.css">
+  <link rel="stylesheet" href="/us-en/astra/css/www-netapp-library-critical.min.css" media="all" >
+  <link rel="stylesheet" href="/us-en/astra/css/www-netapp-library-non-critical.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="/us-en/astra/css/www-netapp-library-global-header-footer.min.css">
+
+  <!-- NetApp IE Customizations -->
+  <link rel="stylesheet" href='/us-en/astra/css/na-utility.css' type='text/css'>
+  <link rel="stylesheet" href='/us-en/astra/css/na-sidebar.css' type='text/css'>
+  <link rel='stylesheet' href='/us-en/astra/css/clouddocs.css' type='text/css'>
+  <link rel='stylesheet' href='/us-en/astra/css/na-pagenav.css' type='text/css'>
+
+  
+  <link rel="stylesheet" href="/us-en/astra/css/astra.css" type="text/css">
+  
+
+  
+  <link rel='stylesheet' href='/us-en/astra/css/na-feature.css' type='text/css'>
+  
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
+  
+    <script src='/us-en/astra/js/na-search.js'></script>
+  
+
+  
+  <script src='/us-en/astra/js/na-pagenav.js'></script>
+  
+
+  <link rel='stylesheet' href='/us-en/astra/css/prism.css' type='text/css'>
+  <link rel='stylesheet' href='/us-en/astra/css/prism-netapp.css' type='text/css'>
+
+
+  <script src='/us-en/astra/js/na-utility.js'></script>
+  <script src='/us-en/astra/js/clouddocs.js'></script>
+  <script>
+  if (document.location.hostname === "docs.netapp.com") {
+    var head = document.getElementsByTagName('head')[0];
+    var adobe = document.createElement("script");
+    adobe.type = "text/javascript";
+    adobe.src = "//assets.adobedtm.com/60287eadf1ee/c284da483c83/launch-e9ff3acac59f.min.js";
+    head.appendChild(adobe);
+  }
+  </script>
+  <script src='/us-en/astra/js/jquery.navgoco.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src='/us-en/astra/js/toc.js'></script>
+  <script src='/us-en/astra/js/customscripts.js'></script>
+
+  <script>
+      $(document).ready(function() {
+          
+          var collapseOnInit = true;
+          
+
+          var navSettings = {
+              "caretHtml": '',
+              "accordion": collapseOnInit,
+              "openClass": 'active', // open
+              "save": false, // leave false or nav highlighting doesn't work right
+              "cookie": {
+                  "name": 'navgoco',
+                  "expires": false,
+                  "path": '/'
+              },
+              "slide": {
+                  "duration": 400,
+                  "easing": 'swing'
+              }
+          };
+
+          // Initialize navgoco with default options
+          $("#mysidebar").navgoco(navSettings);
+          
+
+          $("#collapseAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', false);
+          });
+
+          $("#expandAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', true);
+          });
+
+      });
+
+  </script>
+  <script>
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+  </script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-81697994-3"></script>
+  <script>
+  if (document.location.hostname === "docs.netapp.com") {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-81697994-3');
+  }
+  </script>
+</head>
+
+
+  <body class role="document">
+    <div id="page" class="n-off-canvas-menu">
+      <div class="n-off-canvas-menu__menu"><!--TODO: Add offcanvas code --></div>
+      <div class="n-off-canvas-menu__content-wrap">
+        <header class="site-header" id="banner">
+  <!-- Start top_hat -->
+  <div class="n-top-hat">
+    <div class="n-container">
+      <div class="n-top-hat__cross-property-nav">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/products-a-z/" class="n-top-hat__link">Product and Solutions</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/support-and-training/netapp-university/" class="n-top-hat__link">Support and Training</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://cloud.netapp.com" class="n-top-hat__link">Cloud Central</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://community.netapp.com/" class="n-top-hat__link">Community</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://blog.netapp.com/" class="n-top-hat__link">Blog</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://customers.netapp.com/en/" class="n-top-hat__link">Customer Stories</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/us/contact-us/index.aspx" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="n-top-hat__utils">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/us/contact-us/index.aspx" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End top_hat -->
+
+  <!-- Start property bar -->
+  <style>
+    .n-property-navigation-bar__menus--desktop-experience .n-menu--mega__default-content__heading span {
+    color: #34B0FF;
+    }
+  </style>
+  <div class="n-property-bar " data-ntap-ui="sticky-nav">
+    <div class="n-property-bar__inner-wrap">
+      <div class="n-property-bar__menu-toggle">
+        <a href="#" class="n-property-bar__menu-toggle-link">
+          <span class="n-property-bar__menu-toggle-text">Menu</span>
+          <svg class="n-icon-bars n-property-bar__menu-toggle-icon" aria-labelledby="title">
+            <title>bars</title>
+            <use xlink:href="/us-en/astra/common/svg/sprite.svg#bars"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="n-property-bar__property-mark ">
+        <a href="https://www.netapp.com" class="n-property-bar__property-link">
+          <div class="n-property-bar__logo">
+            <svg class="n-icon-netapp-mark n-icon-netapp-mark n-property-bar__netapp-mark-icon" aria-labelledby="title">
+              <title>netapp-mark</title>
+              <use xlink:href="/us-en/astra/common/svg/sprite.svg#netapp-mark"></use>
+            </svg>
+            <svg class="n-icon-netapp-logo n-property-bar__logo-svg" aria-labelledby="title">
+              <title>netapp-logo</title>
+              <use xlink:href="/us-en/astra/common/svg/sprite.svg#netapp-logo"></use>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      
+      <div class="search-property-bar">
+        <div id="search-demo-container" class="searchbox n-property-bar__search">
+          <div id="react-search" data-type="widget" data-placeholder="Search Documentation" data-no-results-found="No results were found for {query}" data-did-you-mean="Search for {suggestion}." data-no-results-found-did-you-mean="No results found for {query}. Did you mean {suggestion}?" data-results-found="{hitCount} results found"  ></div>
+          <button class="n-property-bar__search-toggle-button" type="button">
+            <svg class="n-icon-search n-property-bar__search-toggle-button-icon" aria-labelledby="title">
+              <title>search</title>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="n-property-bar__toolbar"><!-- Start Language Selector --><!-- End Language Selector -->
+
+    <div class="n-property-bar__cta"></div>
+  </div>
+  <script>
+    $(function(){
+        var currentLocalization = $('html').attr('lang');
+
+        var localizationsDictionary = {
+            "en-CA" : "https://www.netapp.com/search/index.aspx?for_cr=canada&",
+            "en-IN" : "https://www.netapp.com/search/index.aspx?for_cr=india&",
+            "nl-NL" : "https://www.netapp.com/search/index.aspx?for_cr=netherlands&",
+            "ru-RU" : "https://www.netapp.com/search/index.aspx?for_cr=russia&",
+            "sv-SE" : "https://www.netapp.com/search/index.aspx?for_cr=sweden&",
+            "it-IT" : "https://www.netapp.com/search/index.aspx?for_cr=italy&",
+            "he-IL" : "https://www.netapp.com/search/index.aspx?for_cr=israel&",
+            "ko-KR" : "https://www.netapp.com/search/index.aspx?for_cr=korea&",
+            "zh-TW" : "https://www.netapp.com/search/index.aspx?for_cr=taiwan&",
+            "en-GB" : "https://www.netapp.com/search/index.aspx?for_cr=unitedkingdom&",
+            "en-SG" : "https://www.netapp.com/search/index.aspx?for_cr=asean&",
+            "en-AU" : "https://www.netapp.com/search/index.aspx?for_cr=australia&",
+            "pt-BR" : "https://www.netapp.com/search/index.aspx?for_cr=brasil&",
+            "de-CH" : "https://www.netapp.com/search/index.aspx?for_cr=switzerland&",
+            "es-MX" : "https://www.netapp.com/search/index.aspx?for_cr=mexico&"
+        };
+
+        if($('html').hasClass('ntap-whitelisted') && localizationsDictionary.hasOwnProperty(currentLocalization)) {
+            $('.n-property-bar__property-link').attr('href', '/');
+        }
+    });
+  </script>
+  <!-- End property bar -->
+</header>
+
+        <div class="ie-utility">
+  <div class="ie-menu">
+    <div class="n-breadcrumb">
+      <ul class="n-breadcrumb__list">
+        <li class="n-breadcrumb__list-item">
+          <a href="https://www.netapp.com">Home</a>
+        </li>
+        <li class="n-breadcrumb__list-item">
+          <a href="https://docs.netapp.com">Documentation</a>
+        </li>
+        
+
+        <li class="n-breadcrumb__list-item">
+          <a href="/us-en/astra/">Astra</a>
+        </li>
+        <li class="n-breadcrumb__list-item">
+          Set up Google Cloud
+        </li>
+      </ul>
+    </div>
+
+    <div style="clear: both"></div><!-- Main needs to have height -->
+  </div>
+</div>
+
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+  <!-- Sidebar Column -->
+  
+  <div class="col-md-3" >
+      <div class="n-pdf-header">
+  <a id="toggleButtonPdf" class="n-pdf-button" type="button">PDFs<span>
+    </span>
+  </a>
+</div>
+<ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><div class="n-pdf-section">
+      <span class="n-pdf-section-title">Site</span>
+    </div>
+    <li>
+      <a target="_blank" href="/us-en/astra/pdfs/fullsite-sidebar/Astra_Control_Service_documentation.pdf" >
+        <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+        Astra Control Service documentation
+      </a>
+    </li>
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Release_notes.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Release notes
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Get_started.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Get started
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Set_up_your_cloud_provider.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Set up your cloud provider
+          </a>
+        </li>
+        <span>
+          
+    <div class="n-pdf-section">
+  <span class="n-pdf-section-title">This page</span>
+</div>
+
+<li class="active">
+  <a target="_blank" href="/us-en/astra/pdfs/pages/get-started/set-up-google-cloud.pdf" >
+    <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+    Set up Google Cloud
+  </a>
+</li>
+
+
+  
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Use_Astra_Control_Service.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Use Astra Control Service
+          </a>
+        </li>
+        <span>
+          
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Manage_and_protect_apps.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Manage and protect apps
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/View_app_and_compute_health.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            View app and compute health
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Manage_your_account.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Manage your account
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Learn.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Learn
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Deploy_apps.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Deploy apps
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+    
+      <span class="subfolders" style="display:none;">
+        
+          <div class="n-pdf-section">
+            <span class="n-pdf-section-title">
+              Sections
+            </span>
+          </div>
+        
+        <li>
+          <a target="_blank" href="/us-en/astra/pdfs/sidebar/Knowledge_and_support.pdf" >
+            <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>
+            Knowledge and support
+          </a>
+        </li>
+        <span>
+          
+
+
+
+
+
+
+          
+        </span>
+      </span>
+    
+
+  
+
+
+
+
+</ul>
+
+<script>
+  $("#toggleContainerPdf li.active").parents('li').toggle('display');
+  $("#toggleContainerPdf li.active").parents('span.subfolders').toggle('display');
+  $("#toggleButtonPdf").click(function () {
+    $("#toggleContainerPdf").toggle('display');
+  });
+</script><ul id="mysidebar" class="nav"><li class=" "><a class="na-navbar-padding" href="/us-en/astra/index.html">
+        Astra Control Service docs
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Release notes</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/release-notes/whats-new.html">
+        What's new
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/release-notes/known-issues.html">
+        Known issues
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/release-notes/known-limitations.html">
+        Known limitations
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Get started</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/intro.html">
+        Intro to Astra Control Service
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/quick-start.html">
+        Quick start
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Set up your cloud provider</div>
+      </a>
+      <ul><li class="  active "><a class="na-navbar-padding" href="/us-en/astra/get-started/set-up-google-cloud.html">
+        Set up Google Cloud
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/set-up-microsoft-azure.html">
+        Set up Microsoft Azure
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/register.html">
+        Register for an Astra Control account
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/add-first-cluster.html">
+        Manage compute from Astra Control
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/whats-next.html">
+        What's next?
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/videos.html">
+        Videos
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/get-started/faq.html">
+        FAQ
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Use Astra Control Service</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/log-in.html">
+        Log in
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Manage and protect apps</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/manage-apps.html">
+        Start managing apps
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/protect-apps.html">
+        Protect apps
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/restore-apps.html">
+        Restore apps
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/clone-apps.html">
+        Clone and migrate apps
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> View app and compute health</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/view-dashboard.html">
+        Dashboard summary
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/view-clusters.html">
+        Compute health and details
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/view-apps.html">
+        App health and details
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Manage your account</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/set-up-billing.html">
+        Set up billing
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/manage-users.html">
+        Invite and manage users
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/manage-credentials.html">
+        Manage cloud provider credentials
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/view-account-activity.html">
+        View account activity
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/manage-notifications.html">
+        Manage notifications
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/close-account.html">
+        Close your account
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/use/unmanage.html">
+        Unmanage apps and compute
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/automation.html">
+        Automate with REST
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Learn</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/learn/azure-storage.html">
+        Storage for AKS clusters
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/learn/choose-class-and-size.html">
+        Storage for GKE clusters
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/learn/validated-vs-standard.html">
+        Validated apps vs standard apps
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/learn/define-custom-app.html">
+        Defining a custom app
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Deploy apps</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/solutions/jenkins-deploy-from-helm-chart.html">
+        Deploy Jenkins
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/solutions/mariadb-deploy-from-helm-chart.html">
+        Deploy MariaDB
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/solutions/mysql-deploy-from-helm-chart.html">
+        Deploy MySQL
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/solutions/postgres-deploy-from-helm-chart.html">
+        Deploy Postgres
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> Knowledge and support</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/us-en/astra/support/register-support.html">
+        Register for support
+      </a></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/support/get-help.html">
+        Get help
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/us-en/astra/legal-notices.html">
+        Legal notices
+      </a></li></ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+  </div>
+  
+
+  <div class="ie-content-pane n-doc__component-detail-content n-doc__component-detail-content--show-code">
+    <!-- Begin of page container -->
+    <article class="page-content">
+      
+
+
+
+<div class="n-doc__component-detail-heading-wrap">
+  <h1 class="n-doc__component-detail-heading">Set up Google Cloud</h1>
+</div>
+
+
+<p class="page-details">
+  
+    
+    <time datetime="2021-07-12 01:31:55 +0000">07/12/2021</time>
+    
+  
+
+<span>Contributors
+  <a target="_blank" href="https://github.com/netapp-bcammett">
+    <img  class="avatar avatar-small"
+          alt="netapp-bcammett"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/18287750?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
+  <a target="_blank" href="https://github.com/ebarcott">
+    <img  class="avatar avatar-small"
+          alt="ebarcott"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/44878916?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
+</span>
+
+
+  <span>
+    <a target="_blank" href="/us-en/astra/pdfs/pages/get-started/set-up-google-cloud.pdf" role="button">
+      <img src="/us-en/astra/images/pdf.png" width="20" height="20"/>Download PDF of this page</a>
+  </span>
+
+
+</p>
+
+
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A few steps are required to prepare your Google Cloud project before you can manage Google Kubernetes Engine clusters with Astra Control Service.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start-for-setting-up-google-cloud">Quick start for setting up Google Cloud</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Get started quickly by following these steps or scroll down to the remaining sections for full details.</p>
+</div>
+<div class="sect3">
+<h4 id="review-astra-control-service-requirements-for-google-kubernetes-engine"><span class="image"><img src="../media/get-started/number1.png" alt="Number 1"></span> Review Astra Control Service requirements for Google Kubernetes Engine</h4>
+<div class="paragraph quick-margin-para">
+<p>Ensure that clusters are healthy and running a Kubernetes version in the range of 1.17 to 1.20, that worker nodes are online and running <strong>Ubuntu</strong>, and more. <a href="#gke-cluster-requirements">Learn more about this step</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="purchase-cloud-volumes-service-for-google-cloud"><span class="image"><img src="../media/get-started/number2.png" alt="Number 2"></span> Purchase Cloud Volumes Service for Google Cloud</h4>
+<div class="paragraph quick-margin-para">
+<p>Go to the NetApp Cloud Volumes Service page in the Google Cloud Marketplace and click Purchase. <a href="#purchase-cloud-volumes-service-for-google-cloud-2">Learn more about this step</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="enable-apis-in-your-google-cloud-project"><span class="image"><img src="../media/get-started/number3.png" alt="Number 3"></span> Enable APIs in your Google Cloud project</h4>
+<div class="paragraph quick-margin-para">
+<p>Enable the following Google Cloud APIs:</p>
+</div>
+<div class="ulist quick-margin-list">
+<ul>
+<li>
+<p>Google Kubernetes Engine</p>
+</li>
+<li>
+<p>Cloud Storage</p>
+</li>
+<li>
+<p>Cloud Storage JSON API</p>
+</li>
+<li>
+<p>Service Usage</p>
+</li>
+<li>
+<p>Cloud Resource Manager API</p>
+</li>
+<li>
+<p>NetApp Cloud Volumes Service</p>
+</li>
+<li>
+<p>Service Consumer Management API</p>
+</li>
+<li>
+<p>Service Networking API</p>
+</li>
+<li>
+<p>Service Management API</p>
+</li>
+</ul>
+</div>
+<div class="paragraph quick-margin-para">
+<p><a href="#enable-apis-in-your-project">Follow step-by-step instructions</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="create-a-service-account-that-has-the-required-permissions"><span class="image"><img src="../media/get-started/number4.png" alt="Number 4"></span> Create a service account that has the required permissions</h4>
+<div class="paragraph quick-margin-para">
+<p>Create a Google Cloud service account that has the following permissions:</p>
+</div>
+<div class="ulist quick-margin-list">
+<ul>
+<li>
+<p>Kubernetes Engine Admin</p>
+</li>
+<li>
+<p>NetApp Cloud Volumes Admin</p>
+</li>
+<li>
+<p>Storage Admin</p>
+</li>
+<li>
+<p>Service Usage Viewer</p>
+</li>
+<li>
+<p>Compute Network Viewer</p>
+</li>
+</ul>
+</div>
+<div class="paragraph quick-margin-para">
+<p><a href="#create-a-service-account">Read step-by-step instructions</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="create-a-service-account-key"><span class="image"><img src="../media/get-started/number5.png" alt="Number 5"></span> Create a service account key</h4>
+<div class="paragraph quick-margin-para">
+<p>Create a key for the service account and save the key file in a secure location. <a href="#create-a-service-account-key-2">Follow step-by-step instructions</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="set-up-network-peering-for-your-vpc"><span class="image"><img src="../media/get-started/number6.png" alt="Number 6"></span> Set up network peering for your VPC</h4>
+<div class="paragraph quick-margin-para">
+<p>Set up network peering from your VPC to Cloud Volumes Service for Google Cloud. <a href="#set-up-network-peering-for-your-vpc-2">Follow step-by-step instructions</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following image depicts each of these steps that you&#8217;ll need to complete.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../media/get-started/diagram-google-cloud.png" alt="A conceptual diagram that shows a Google Cloud project" width="a service account with IAM roles and a key" height="enabled APIs"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gke-cluster-requirements">GKE cluster requirements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Kubernetes cluster must meet the following requirements so you can discover and manage it from Astra Control Service.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Kubernetes version</dt>
+<dd>
+<p>A cluster must be running a Kubernetes version in the range of 1.17 to 1.20.</p>
+</dd>
+<dt class="hdlist1">Image type</dt>
+<dd>
+<p>The image type for each worker node must be Container-Optimized OS or Ubuntu.</p>
+</dd>
+<dt class="hdlist1">Cluster state</dt>
+<dd>
+<p>Clusters must be running in a healthy state and have at least one online worker node with no worker nodes in a failed state.</p>
+</dd>
+<dt class="hdlist1">Google Cloud region</dt>
+<dd>
+<p>Clusters must be running in a <a href="https://cloud.netapp.com/cloud-volumes-global-regions#cvsGc">Google Cloud region where Cloud Volumes Service for Google Cloud is supported.</a> Note that Astra Control Service supports both service types: CVS and CVS-Performance.</p>
+</dd>
+<dt class="hdlist1">Networking</dt>
+<dd>
+<p>The cluster must reside in a VPC that is peered with Cloud Volumes Service for Google Cloud. <a href="#set-up-network-peering-for-your-vpc-2">This step is described below</a>.</p>
+</dd>
+<dt class="hdlist1">Private clusters</dt>
+<dd>
+<p>If the cluster is private, the <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept" target="_blank" rel="noopener">authorized networks</a> must allow the Astra Control Service IP addresses:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>54.164.233.140/32</p>
+</li>
+<li>
+<p>3.218.120.204/32</p>
+</li>
+<li>
+<p>34.193.99.138/32</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Mode of operation for a GKE cluster</dt>
+<dd>
+<p>You should use the Standard mode of operation. The Autopilot mode hasn&#8217;t been tested at this time. <a href="https://cloud.google.com/kubernetes-engine/docs/concepts/types-of-clusters#modes" target="_blank" rel="noopener">Learn more about modes of operation</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="purchase-cloud-volumes-service-for-google-cloud-2">Purchase Cloud Volumes Service for Google Cloud</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Astra Control Service uses Cloud Volumes Service for Google Cloud as the backend storage for your persistent volumes. You need to purchase Cloud Volumes Service for Google Cloud from the Google Cloud Marketplace to enable billing for persistent volumes.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Step</div>
+<ol class="arabic">
+<li>
+<p>Go to the <a href="https://console.cloud.google.com/marketplace/product/endpoints/cloudvolumesgcp-api.netapp.com" target="_blank" rel="noopener">NetApp Cloud Volumes Service page</a> in the Google Cloud Marketplace, click <strong>Purchase</strong>, and follow the prompts.</p>
+<div class="paragraph">
+<p><a href="https://cloud.google.com/solutions/partners/netapp-cloud-volumes/quickstart#purchase_the_service" target="_blank" rel="noopener">Follow step-by-step instructions in the Google Cloud documentation to purchase and enable the service</a>.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enable-apis-in-your-project">Enable APIs in your project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your project needs permissions to access specific Google Cloud APIs. APIs are used to interact with Google Cloud resources, such as Google Kubernetes Engine (GKE) clusters and NetApp Cloud Volumes Service storage.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Step</div>
+<ol class="arabic">
+<li>
+<p><a href="https://cloud.google.com/endpoints/docs/openapi/enable-api" target="_blank" rel="noopener">Use the Google Cloud console or gcloud CLI to enable the following APIs</a>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Google Kubernetes Engine</p>
+</li>
+<li>
+<p>Cloud Storage</p>
+</li>
+<li>
+<p>Cloud Storage JSON API</p>
+</li>
+<li>
+<p>Service Usage</p>
+</li>
+<li>
+<p>Cloud Resource Manager API</p>
+</li>
+<li>
+<p>NetApp Cloud Volumes Service</p>
+</li>
+<li>
+<p>Service Consumer Management API</p>
+</li>
+<li>
+<p>Service Networking API</p>
+</li>
+<li>
+<p>Service Management API</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following video shows how to enable the APIs from the Google Cloud console.</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="../media/get-started/video-enable-gcp-apis.mp4" width="848" height="480" controls>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-a-service-account">Create a service account</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Astra Control Service uses a Google Cloud service account to facilitate Kubernetes application data management on your behalf.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Steps</div>
+<ol class="arabic">
+<li>
+<p>Go to Google Cloud and <a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account" target="_blank" rel="noopener">create a service account by using the console, gcloud command, or another preferred method</a>.</p>
+</li>
+<li>
+<p>Grant the service account the following roles:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Kubernetes Engine Admin</strong> - Used to list clusters and create admin access to manage apps.</p>
+</li>
+<li>
+<p><strong>NetApp Cloud Volumes Admin</strong> - Used to manage persistent storage for apps.</p>
+</li>
+<li>
+<p><strong>Storage Admin</strong> - Used to manage buckets and objects for backups of apps.</p>
+</li>
+<li>
+<p><strong>Service Usage Viewer</strong> - Used to check if the required Cloud Volumes Service for Google Cloud APIs are enabled.</p>
+</li>
+<li>
+<p><strong>Compute Network Viewer</strong> - Used to check if the Kubernetes VPC is allowed to reach Cloud Volumes Service for Google Cloud.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If you&#8217;d like to use gcloud, you can follow steps from within the Astra Control interface. Click <strong>Account &gt; Credentials &gt; Add Credentials</strong>, and then click <strong>Instructions</strong>.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;d like to use the Google Cloud console, the following video shows how to create the service account from the console.</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="../media/get-started/video-create-gcp-service-account.mp4" width="848" height="480" controls>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configure-the-service-account-for-a-shared-vpc">Configure the service account for a shared VPC</h3>
+<div class="paragraph">
+<p>To manage GKE clusters that reside in one project, but use a VPC from a different project (a shared VPC), then you need to specify the Astra service account as a member of the host project with the <strong>Compute Network Viewer</strong> role.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Steps</div>
+<ol class="arabic">
+<li>
+<p>From the Google Cloud console, go to <strong>IAM &amp; Admin</strong> and select <strong>Service Accounts</strong>.</p>
+</li>
+<li>
+<p>Find the Astra service account that has <a href="set-up-google-cloud.html#create-a-service-account">the required permissions</a> and then copy the email address.</p>
+</li>
+<li>
+<p>Go to your host project and then select <strong>IAM &amp; Admin</strong> &gt; <strong>IAM</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Add</strong> and add an entry for the service account.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><strong>New members</strong>: Enter the email address for the service account.</p>
+</li>
+<li>
+<p><strong>Role</strong>: Select <strong>Compute Network Viewer</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<div class="title">Result</div>
+<p>Adding a GKE cluster using a shared VPC will fully work with Astra.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-a-service-account-key-2">Create a service account key</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Instead of providing a user name and password to Astra Control Service, you&#8217;ll provide a service account key when you add your first cluster. Astra Control Service uses the service account key to establish the identity of the service account that you just set up.</p>
+</div>
+<div class="paragraph">
+<p>The service account key is plaintext stored in the JavaScript Object Notation (JSON) format. It contains information about the GCP resources that you have permission to access.</p>
+</div>
+<div class="paragraph">
+<p>You can only view or download the JSON file when you create the key. However, you can create a new key at any time.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Steps</div>
+<ol class="arabic">
+<li>
+<p>Go to Google Cloud and <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys" target="_blank" rel="noopener">create a service account key by using the console, gcloud command, or another preferred method</a>.</p>
+</li>
+<li>
+<p>When prompted, save the service account key file in a secure location.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following video shows how to create the service account key from the Google Cloud console.</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="../media/get-started/video-create-gcp-service-account-key.mp4" width="848" height="480" controls>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="set-up-network-peering-for-your-vpc-2">Set up network peering for your VPC</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The final step is to set up networking peering from your VPC to Cloud Volumes Service for Google Cloud.</p>
+</div>
+<div class="paragraph">
+<p>The easiest way to set up network peering is by obtaining the gcloud commands directly from Cloud Volumes Service. The commands are available from Cloud Volumes Service when creating a new file system.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Steps</div>
+<ol class="arabic">
+<li>
+<p><a href="https://cloud.netapp.com/cloud-volumes-global-regions#cvsGcp" target="_blank" rel="noopener">Go to NetApp Cloud Central&#8217;s Global Regions Maps</a> and identify the service type that you&#8217;ll be using in the Google Cloud region where your cluster resides.</p>
+<div class="paragraph">
+<p>Cloud Volumes Service provides two service types: CVS and CVS-Performance. <a href="https://cloud.google.com/solutions/partners/netapp-cloud-volumes/service-types" target="_blank" rel="noopener">Learn more about these service types</a>.</p>
+</div>
+</li>
+<li>
+<p><a href="https://console.cloud.google.com/netapp/cloud-volumes/volumes" target="_blank" rel="noopener">Go to Cloud Volumes in Google Cloud Platform</a>.</p>
+</li>
+<li>
+<p>On the <strong>Volumes</strong> page, click <strong>Create</strong>.</p>
+</li>
+<li>
+<p>Under <strong>Service Type</strong>, select either <strong>CVS</strong> or <strong>CVS-Performance</strong>.</p>
+<div class="paragraph">
+<p>You need to choose the correct service type for your Google Cloud region. This is the service type that you identified in step 1. After you select a service type, the list of regions on the page updates with the regions where that service type is supported.</p>
+</div>
+<div class="paragraph">
+<p>After this step, you&#8217;ll only need to enter your networking information to obtain the commands.</p>
+</div>
+</li>
+<li>
+<p>Under <strong>Region</strong>, select your region and zone.</p>
+</li>
+<li>
+<p>Under <strong>Network Details</strong>, select your VPC.</p>
+<div class="paragraph">
+<p>If you haven&#8217;t set up network peering, you&#8217;ll see the following notification:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../media/get-started/gcp-peering.gif" alt="gcp peering"></span></p>
+</div>
+</li>
+<li>
+<p>Click the button to view the network peering set up commands.</p>
+</li>
+<li>
+<p>Copy the commands and run them in Cloud Shell.</p>
+<div class="paragraph">
+<p>For more details about using these commands, refer to the <a href="https://cloud.google.com/solutions/partners/netapp-cloud-volumes/quickstart#configure_private_services_access_and_set_up_network_peering" target="_blank" rel="noopener">Quickstart for Cloud Volumes Service for GCP</a>.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://cloud.google.com/solutions/partners/netapp-cloud-volumes/setting-up-private-services-access" target="_blank" rel="noopener">Learn more about configuring private services access and setting up network peering</a>.</p>
+</div>
+</li>
+<li>
+<p>After you&#8217;re done, you can click cancel on the <strong>Create File System</strong> page.</p>
+<div class="paragraph">
+<p>We started creating this volume only to get the commands for network peering.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  
+  <!-- Start Page Toolbar -->
+  <div class="page-nav-toolbar">
+    <div class="page-nav-contribute"  >
+      <div class="page-nav-contribute-title">CONTRIBUTE</div>
+      <a target="_blank" href="https://github.com/NetAppDocs/astra/blob/main/get-started/set-up-google-cloud.adoc" class="btn btn-default githubEditButton" role="button"><img src="/us-en/astra/images/github.png" class="github-icon" />Edit on GitHub</a>
+      <a target="_blank" href="https://github.com/NetAppDocs/astra/issues/new?body=Page%3A%20[Set up Google Cloud](https://docs.netapp.com/us-en/astra/get-started/set-up-google-cloud.html)" class="btn btn-default githubEditButton" role="button"><img src="/us-en/astra/images/github.png" class="github-icon" />Request doc changes</a>
+      <a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  >Contributor's Guide</a>
+    </div>
+    <div class="page-nav-container">
+      <nav class="page-nav-fixed">
+        <div class="page-nav-title">ON THIS PAGE</div>
+        <div class="page-nav-links">
+          <ul class="page-nav-inner" id="page-menu"></ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  
+  <div style="clear: both"></div><!-- Main needs to have height -->
+</div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+      <div class="n-footer__bottom-left">
+
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+            <a href="https://www.netapp.com/us/legal/copyright.aspx">© 2021 NetApp, Inc.</a>
+            </li>
+
+</ul>
+</div>
+<div class="n-footer__social-links">
+<ul class="n-footer__social-link-list">
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-blog" href="https://blog.netapp.com" target="_blank" title="blog" alt="blog">
+<span class="n-footer__social-link-text">blog</span>
+<svg class="n-icon-blog n-footer__social-link-icon" aria-labelledby="title">
+  <title>blog@</title>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#blog"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-community" href="https://community.netapp.com/" target="_blank" title="community" alt="community">
+<span class="n-footer__social-link-text">community</span>
+<svg class="n-icon-community n-footer__social-link-icon" aria-labelledby="title">
+<title>community@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#comments"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-twitter" href="https://twitter.com/netapp" target="_blank" title="twitter" alt="twitter">
+<span class="n-footer__social-link-text">twitter</span>
+<svg class="n-icon-twitter n-footer__social-link-icon" aria-labelledby="title">
+<title>twitter@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#twitter"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-facebook" href="https://www.facebook.com/NetApp" target="_blank" title="facebook" alt="facebook">
+<span class="n-footer__social-link-text">facebook</span>
+<svg class="n-icon-facebook n-footer__social-link-icon" aria-labelledby="title">
+<title>facebook@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#facebook"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-linkedin" href="https://www.linkedin.com/company/netapp" target="_blank" title="linkedin" alt="linkedin">
+<span class="n-footer__social-link-text">linkedin</span>
+<svg class="n-icon-linkedin n-footer__social-link-icon" aria-labelledby="title">
+<title>linkedin@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#linkedin"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-youtube" href="https://www.youtube.com/user/NetAppTV" target="_blank" title="youtube" alt="youtube">
+<span class="n-footer__social-link-text">youtube</span>
+<svg class="n-icon-youtube n-footer__social-link-icon" aria-labelledby="title">
+<title>youtube@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#youtube"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-slideshare" href="https://www.slideshare.net/NetApp" target="_blank" title="slideshare" alt="slideshare">
+<span class="n-footer__social-link-text">slideshare</span>
+<svg class="n-icon-slideshare n-footer__social-link-icon" aria-labelledby="title">
+<title>slideshare@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/us-en/astra/common/svg/sprite.svg#slideshare"></use>
+</svg>
+
+</a>
+</li>
+</ul>
+</div>
+
+</div>
+<div class="n-footer__bottom-right">
+  <p class="n-footer__fine-print">Have feedback for our website?<a target="_self" href="javascript:netapp_mailto()" class="n-footer__copyright">Let us know</a>
+  <a href="https://docs.netapp.com/us-en/announcements/" class="n-footer__copyright">Announcements</a>
+  </p>
+</div>
+</div>
+</div>
+</footer>
+
+      </div>
+
+      <!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/us-en/astra/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/us-en/astra/js/prism.js'></script>
+      <script type="text/javascript" src='/us-en/astra/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/us-en/astra/js/www-ntap.js'></script>
+  </body>
+
+  
+</html>
